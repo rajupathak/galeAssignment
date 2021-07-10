@@ -3,12 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="qagala.FilpCartTest">
+      <class name="qagala.FaceBookLoginTestt">
         <methods>
-          <include name="verifyProDuctList"/>
+          <include name="verifyHomePageTitletest"/>
           <include name="initDriver"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- qagala.FilpCartTest -->
+      </class> <!-- qagala.FaceBookLoginTestt -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -19,8 +19,16 @@ public class FaceBookLoginPage {
 	public FaceBookLoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-	
-	
-	
-	
+
+	public WebElement getEmail() {
+		return email;
+	}
+
+	public WebElement getpassword() {
+		return password;
+	}
+
+	public WebElement getLogin() {
+		return loginButton;
+	}
 }

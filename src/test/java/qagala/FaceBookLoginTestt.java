@@ -42,6 +42,16 @@ public class FaceBookLoginTestt {
 
 		// Now Login to facebook
 
+		String email = ExCelReader.getCellvalue(0, 1, 0);
+		String password = ExCelReader.getCellvalue(0, 1, 1);
+		pageObject.getEmail().sendKeys(email);
+		pageObject.getEmail().sendKeys(password);
+
+		pageObject.getLogin().click();
+//print CurrentUrl
+		System.out.println(driver.getCurrentUrl());
+		// Print Hrader
+		System.out.println(driver.getPageSource());
 	}
 
 	@AfterMethod
