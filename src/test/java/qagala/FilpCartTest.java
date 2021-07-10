@@ -12,7 +12,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.gale.driver.Driver;
+import com.gale.driver.DriverManager;
+import com.gale.enums.ConfigProperties;
 import com.gale.pages.FlipCartHomePage;
+import com.gale.util.ReadProperty;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -20,23 +24,19 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 //even I tried to create Framework but not able to use properly due to time limit 
 
 public class FilpCartTest {
-	public WebDriver driver = null;
 	FlipCartHomePage pageObject = null;
 	String expectedTitle = "Online Shopping Site for Mobiles";
 
 	@BeforeMethod
-	public void initDriver() {
+	public void initDriver() throws InterruptedException {
+		Driver.initDriver(ReadProperty.get(ConfigProperties.BROWSER));
 
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.get("https://www.flipkart.com/");
-		driver.manage().window().maximize();
-		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		pageObject = new FlipCartHomePage(driver);
+		pageObject = new FlipCartHomePage();
 		// close the PopUp:
 
 		WebElement element = pageObject.getClosePopUp();
 		element.click();
+
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class FilpCartTest {
 
 		// veirfy the Home Page title :
 
-		String actualtTitle = driver.getTitle();
+		String actualtTitle = DriverManager.getDriver().getTitle();
 		if (actualtTitle.contains(expectedTitle)) {
 			Assert.assertTrue(true);
 
@@ -52,8 +52,8 @@ public class FilpCartTest {
 
 	}
 
-	@Test
-	public void verifyProDuctList() {
+	@Test(enabled = true)
+	public void verifyProDuctList() throws InterruptedException {
 		List<String> list1 = new ArrayList();
 		// First Search for ther Prodcut
 
@@ -65,6 +65,7 @@ public class FilpCartTest {
 		WebElement submitButton = pageObject.getSbumitButton();
 
 		submitButton.click();
+		Thread.sleep(5000);
 
 		String prodcutName = pageObject.getProductname().getText();
 		String productPrice = pageObject.getprodcutPrice().getText();
@@ -106,8 +107,8 @@ public class FilpCartTest {
 	@AfterMethod
 	public void tearDown() {
 
-		if (driver != null) {
-			driver.quit();
+		if (DriverManager.getDriver() != null) {
+			Driver.quitDriver();
 		}
 	}
 

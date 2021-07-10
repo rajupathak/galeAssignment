@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.gale.driver.DriverManager;
+
 public class FlipCartHomePage {
 
 	// All the below Xpath are just for an exmaple and consedering there is no
@@ -25,7 +27,7 @@ public class FlipCartHomePage {
 	@FindBy(xpath = "(//div[@class='col col-7-12'])[1]/div[1]")
 	private WebElement prodcutName;
 
-	@FindBy(xpath = "(//div[@class='col col-7-12'])[1]/div[1]")
+	@FindBy(xpath = "((//div[@class='_25b18c'])[1]/div[1]")
 	private WebElement prodcutPrice;
 
 	@FindBy(xpath = "(//div[@class='_3LWZlK'])[1]")
@@ -44,8 +46,8 @@ public class FlipCartHomePage {
 	private WebElement prodcutRatingonnDescriptionPage;
 	
 
-	public FlipCartHomePage(WebDriver driver) {
-		PageFactory.initElements(driver, this);
+	public FlipCartHomePage() {
+		PageFactory.initElements(DriverManager.getDriver(), this);
 	}
 
 	public WebElement getClosePopUp() {
@@ -65,7 +67,7 @@ public class FlipCartHomePage {
 	}
 
 	public WebElement getprodcutPrice() {
-		return prodcutName;
+		return prodcutPrice;
 	}
 
 	public WebElement getproductRating() {
